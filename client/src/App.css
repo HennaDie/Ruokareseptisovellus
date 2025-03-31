@@ -1,0 +1,277 @@
+/* Taustakuva koko näkymän alle */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/images/pexels-ella-olsson-572949-1640777.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  z-index: -1;
+}
+
+/* Yleiset tyylit */
+.App {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+}
+
+/* Yläkulman kirjautumislinkit */
+.login-links {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem 2rem 0;
+  gap: 1.5rem;
+  font-size: 1rem;
+}
+
+.login-links span {
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.login-links a,
+.login-links button {
+  background-color: #9ec5fe;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.login-links a:hover,
+.login-links button:hover {
+  background-color: #7aaefc;
+}
+
+/* Pääkortti / sisältökontti */
+.home-container {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Otsikko */
+.home-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+/* Navigaatio-osiot */
+.nav-links {
+  display: none;
+}
+
+/* Etusivun painikkeet */
+.home-button-group {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.home-page-button {
+  background-color: #9ec5fe;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.home-page-button:hover {
+  background-color: #7aaefc;
+}
+
+/* Uusi resepti -nappi */
+.new-recipe-button {
+  margin: 1rem 0 2rem;
+}
+
+.new-recipe-button button {
+  background-color: #9ec5fe;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.new-recipe-button button:hover {
+  background-color: #7aaefc;
+}
+
+/* Tervetuloteksti */
+.welcome-text {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Hakukenttä ja lomakekentät */
+.search-input,
+.auth-form input,
+.auth-form select,
+.auth-form textarea,
+.recipe-form input[type="text"],
+.recipe-form input[type="file"],
+.recipe-form select,
+.recipe-form textarea {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto;
+  display: block;
+  box-sizing: border-box;
+}
+
+/* Painikkeet lomakkeissa */
+.auth-form button,
+.recipe-form button,
+button[type="submit"] {
+  background-color: #9ec5fe;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.auth-form button:hover,
+.recipe-form button:hover,
+button[type="submit"]:hover {
+  background-color: #7aaefc;
+}
+
+/* Linkit yleisesti */
+a {
+  color: #2b2d42;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Reseptilistaus */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+li {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+li h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #1a1a1a;
+}
+
+/* Painikkeet reseptikortissa */
+li button {
+  margin-right: 0.8rem;
+  margin-top: 1rem;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #9ec5fe;
+  color: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s;
+}
+
+li button:hover {
+  background-color: #7aaefc;
+}
+
+/* Poistonappi korostettuna */
+li button:last-of-type {
+  background-color: #ff9999;
+}
+
+li button:last-of-type:hover {
+  background-color: #e06666;
+}
+
+/* Reseptikuva */
+.recipe-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  object-fit: cover;
+}
+
+/* Lomakekontti */
+.recipe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: left;
+}
+
+/* Responsiivinen mobiilille */
+@media (max-width: 600px) {
+  .login-links {
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .home-title {
+    font-size: 2rem;
+  }
+
+  .search-input {
+    width: 90%;
+  }
+
+  li {
+    padding: 1rem;
+  }
+
+  .home-button-group {
+    flex-direction: column;
+  }
+}
