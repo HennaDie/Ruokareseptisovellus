@@ -23,12 +23,12 @@ const AddRecipe = () => {
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const API_BASE = "https://ruokareseptisovellus.onrender.com";
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Tiedostotyyppi- ja kokovalidaatio
     if (!file.type.startsWith("image/")) {
       setMessage("Vain kuvatiedostot sallittu.");
       return;
@@ -43,7 +43,7 @@ const AddRecipe = () => {
 
     try {
       setUploading(true);
-      const res = await fetch("http://localhost:3000/api/upload", {
+      const res = await fetch(`${API_BASE}/api/upload`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ const AddRecipe = () => {
 
       const data = await res.json();
       if (res.ok) {
-        setImage(data.imageUrl); // imageUrl tulee backendista
+        setImage(data.imageUrl);
       } else {
         setMessage(data.message || "Kuvan lähetys epäonnistui.");
       }
@@ -75,7 +75,7 @@ const AddRecipe = () => {
       category,
     };
 
-    const res = await fetch("http://localhost:3000/api/recipes", {
+    const res = await fetch(`${API_BASE}/api/recipes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -140,7 +140,7 @@ const AddRecipe = () => {
         {image && (
           <>
             <img
-              src={`http://localhost:3000${image}`}
+              src={`${API_BASE}${image}`}
               alt="Esikatselu"
               className="recipe-image"
               style={{ marginTop: "1rem", maxWidth: "100%", height: "auto" }}

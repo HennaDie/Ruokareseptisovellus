@@ -14,10 +14,10 @@ const Register = () => {
     setSuccess(false);
 
     try {
-      const response = await fetch("http://localhost:3000/api/auth/register", {
+      const response = await fetch("https://ruokareseptisovellus.onrender.com/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ username, email, password })
       });
 
       const data = await response.json();
@@ -37,7 +37,6 @@ const Register = () => {
 
   return (
     <div>
-      {/* Yläkulman painikkeet */}
       <div className="login-links">
         <Link to="/login">
           <button className="auth-button">Kirjaudu</button>
@@ -63,7 +62,6 @@ const Register = () => {
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-
         <input
           type="email"
           placeholder="Sähköposti"
@@ -71,7 +69,6 @@ const Register = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-
         <input
           type="password"
           placeholder="Salasana"
@@ -79,7 +76,6 @@ const Register = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-
         <button type="submit">Rekisteröidy</button>
       </form>
     </div>

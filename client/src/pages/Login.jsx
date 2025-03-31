@@ -13,12 +13,12 @@ function Login() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      const response = await fetch("https://ruokareseptisovellus.onrender.com/api/auth/login", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password })
       });
 
       const data = await response.json();
@@ -36,17 +36,10 @@ function Login() {
 
   return (
     <div>
-      {/*Yläkulman painikkeet */}
       <div className="login-links">
-        <Link to="/">
-          <button className="auth-button">Etusivu</button>
-        </Link>
-        <Link to="/register">
-          <button className="auth-button">Rekisteröidy</button>
-        </Link>
-        <Link to="/recipes">
-          <button className="auth-button">Reseptit</button>
-        </Link>
+        <Link to="/"><button className="auth-button">Etusivu</button></Link>
+        <Link to="/register"><button className="auth-button">Rekisteröidy</button></Link>
+        <Link to="/recipes"><button className="auth-button">Reseptit</button></Link>
       </div>
 
       <h1>Kirjaudu sisään</h1>
@@ -60,7 +53,6 @@ function Login() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-
         <input
           type="password"
           placeholder="Salasana"
@@ -68,7 +60,6 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-
         <button type="submit">Kirjaudu sisään</button>
       </form>
     </div>

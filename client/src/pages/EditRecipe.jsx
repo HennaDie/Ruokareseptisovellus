@@ -24,9 +24,10 @@ const EditRecipe = () => {
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const API_BASE = "https://ruokareseptisovellus.onrender.com";
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/recipes/${id}`)
+    fetch(`${API_BASE}/api/recipes/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setName(data.name);
@@ -56,7 +57,7 @@ const EditRecipe = () => {
 
     try {
       setUploading(true);
-      const res = await fetch("http://localhost:3000/api/upload", {
+      const res = await fetch(`${API_BASE}/api/upload`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -88,7 +89,7 @@ const EditRecipe = () => {
       category,
     };
 
-    const res = await fetch(`http://localhost:3000/api/recipes/${id}`, {
+    const res = await fetch(`${API_BASE}/api/recipes/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -152,7 +153,7 @@ const EditRecipe = () => {
         {image && (
           <>
             <img
-              src={`http://localhost:3000${image}`}
+              src={`${API_BASE}${image}`}
               alt="Esikatselu"
               className="recipe-image"
               style={{ marginTop: "1rem", maxWidth: "100%", height: "auto" }}

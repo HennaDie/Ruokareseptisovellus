@@ -13,13 +13,14 @@ function Favorites() {
   const [selectedCategory, setSelectedCategory] = useState("Kaikki");
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const API_BASE = "https://ruokareseptisovellus.onrender.com";
 
   useEffect(() => {
     if (!token) return;
 
     const fetchFavorites = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/recipes/favorites", {
+        const res = await fetch(`${API_BASE}/api/recipes/favorites`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -34,7 +35,7 @@ function Favorites() {
 
   const removeFromFavorites = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/recipes/${id}/favorite`, {
+      const res = await fetch(`${API_BASE}/api/recipes/${id}/favorite`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -113,7 +114,7 @@ function Favorites() {
 
                   {recipe.image && (
                     <img
-                      src={`http://localhost:3000${recipe.image}`}
+                      src={`${API_BASE}${recipe.image}`}
                       alt={recipe.name}
                       className="recipe-image"
                     />

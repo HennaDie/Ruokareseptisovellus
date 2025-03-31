@@ -13,11 +13,12 @@ function MyRecipes() {
   const [selectedCategory, setSelectedCategory] = useState("Kaikki");
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const API_BASE = "https://ruokareseptisovellus.onrender.com";
 
   useEffect(() => {
     const fetchMyRecipes = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/recipes/my-recipes", {
+        const res = await fetch(`${API_BASE}/api/recipes/my-recipes`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -36,7 +37,7 @@ function MyRecipes() {
     if (!window.confirm("Haluatko varmasti poistaa reseptin?")) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/recipes/${id}`, {
+      const res = await fetch(`${API_BASE}/api/recipes/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -116,7 +117,7 @@ function MyRecipes() {
 
                   {recipe.image && (
                     <img
-                      src={`http://localhost:3000${recipe.image}`}
+                      src={`${API_BASE}${recipe.image}`}
                       alt={recipe.name}
                       className="recipe-image"
                     />

@@ -26,16 +26,18 @@ function Recipes() {
     }
   })();
 
+  const API_BASE = "https://ruokareseptisovellus.onrender.com";
+
   useEffect(() => {
     const fetchRecipes = async () => {
-      const res = await fetch("http://localhost:3000/api/recipes");
+      const res = await fetch(`${API_BASE}/api/recipes`);
       const data = await res.json();
       setRecipes(data);
     };
 
     const fetchFavorites = async () => {
       if (token) {
-        const res = await fetch("http://localhost:3000/api/recipes/favorites", {
+        const res = await fetch(`${API_BASE}/api/recipes/favorites`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const favs = await res.json();
@@ -48,7 +50,7 @@ function Recipes() {
   }, []);
 
   const addToFavorites = async (id) => {
-    const res = await fetch(`http://localhost:3000/api/recipes/${id}/favorite`, {
+    const res = await fetch(`${API_BASE}/api/recipes/${id}/favorite`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +68,7 @@ function Recipes() {
   };
 
   const removeFromFavorites = async (id) => {
-    const res = await fetch(`http://localhost:3000/api/recipes/${id}/favorite`, {
+    const res = await fetch(`${API_BASE}/api/recipes/${id}/favorite`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -85,7 +87,7 @@ function Recipes() {
   const deleteRecipe = async (id) => {
     if (!window.confirm("Haluatko varmasti poistaa reseptin?")) return;
 
-    const res = await fetch(`http://localhost:3000/api/recipes/${id}`, {
+    const res = await fetch(`${API_BASE}/api/recipes/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -158,7 +160,7 @@ function Recipes() {
         <ul>
           {filteredRecipes.map((recipe) => {
             const imageSrc = recipe.image?.startsWith("/uploads/")
-              ? `http://localhost:3000${recipe.image}`
+              ? `${API_BASE}${recipe.image}`
               : recipe.image;
 
             return (
