@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require('../models/user');
 
 module.exports = async (req, res, next) => {
   try {
@@ -8,7 +8,6 @@ module.exports = async (req, res, next) => {
       return res.status(401).json({ message: 'Token puuttuu' });
     }
 
-    
     if (token.startsWith('Bearer ')) {
       token = token.slice(7);
     }

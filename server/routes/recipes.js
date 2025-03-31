@@ -1,11 +1,10 @@
 const express = require("express");
 const authMiddleware = require("../middleware/auth");
 const Recipe = require("../models/Recipe");
-const User = require("../models/User");
+const User = require("../models/user");
 
 const router = express.Router();
 
-//  Hae kaikki reseptit
 router.get("/", async (req, res) => {
   try {
     const recipes = await Recipe.find().populate("user", "username email");
@@ -15,22 +14,15 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Hae kirjautuneen käyttäjän omat reseptit
 router.get("/my-recipes", authMiddleware, async (req, res) => {
   try {
-    console.log("🔐 Käyttäjä ID (tokenista):", req.user?.id);
-
     const recipes = await Recipe.find({ user: req.user.id });
-
-    console.log("📦 Käyttäjän reseptit:", recipes);
     res.json(recipes);
   } catch (error) {
-    console.error("💥 Virhe haettaessa omia reseptejä:", error);
     res.status(500).json({ message: "Palvelinvirhe", error: error.message });
   }
 });
 
-// Hae käyttäjän suosikit
 router.get("/favorites", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).populate("favorites");
@@ -41,7 +33,6 @@ router.get("/favorites", authMiddleware, async (req, res) => {
   }
 });
 
-// Lisää resepti
 router.post("/", authMiddleware, async (req, res) => {
   try {
     const { name, ingredients, instructions, image, category } = req.body;
@@ -55,7 +46,7 @@ router.post("/", authMiddleware, async (req, res) => {
       instructions,
       image,
       category,
-      user: req.user.id,
+      user: req.user.id
     });
 
     await newRecipe.save();
@@ -65,7 +56,6 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
-// Päivitä resepti (vain omistaja)
 router.put("/:id", authMiddleware, async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.id);
@@ -90,7 +80,6 @@ router.put("/:id", authMiddleware, async (req, res) => {
   }
 });
 
-// Poista resepti (vain omistaja)
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.id);
@@ -108,7 +97,6 @@ router.delete("/:id", authMiddleware, async (req, res) => {
   }
 });
 
-// Lisää suosikkeihin
 router.post("/:id/favorite", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
@@ -126,7 +114,6 @@ router.post("/:id/favorite", authMiddleware, async (req, res) => {
   }
 });
 
-// Poista suosikeista
 router.delete("/:id/favorite", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
@@ -138,7 +125,6 @@ router.delete("/:id/favorite", authMiddleware, async (req, res) => {
   }
 });
 
-// Hae yksittäinen resepti
 router.get("/:id", async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.id);

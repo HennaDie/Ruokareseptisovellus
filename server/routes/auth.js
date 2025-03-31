@@ -1,10 +1,9 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../models/user"); // 🔁 pienellä
 
 const router = express.Router();
-
 
 router.post("/register", async (req, res) => {
   try {
@@ -33,7 +32,6 @@ router.post("/register", async (req, res) => {
     res.status(500).json({ message: "Palvelinvirhe" });
   }
 });
-
 
 router.post("/login", async (req, res) => {
   try {
